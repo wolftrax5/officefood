@@ -1,0 +1,24 @@
+{
+  "name": "simple-todos-angular",
+  "main": "simple-todos-angular.js",
+  "authors": [
+    "Alejandro Medina <5almero5@gmail.com>"
+  ],
+  "description": "MVP startupweekend Ags",
+  "moduleType": [],
+  "keywords": [
+    "node",
+    "js",
+    "meteor",
+    "angular"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
