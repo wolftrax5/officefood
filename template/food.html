@@ -1,11 +1,11 @@
 <div class="left">
     <img ng-src="food.img"/>
-    <h2>{{food.name}}</h2>
+    <h2>{{foodDetails.food.name}}</h2>
     <p>
-        {{food.description}}
+        {{foodDetails.food.description}}
     </p>
     <div>
-        ${{food.price}}
+        ${{foodDetails.food.price}}
         <input ng-model="foodDetails.quantity" value="1">
         <button ng-click="foodDetails.addToShoppingCart()">Add</button>
     </div>
@@ -14,6 +14,6 @@
 
 <p>Food _id: {{food._id}}</p>
 <p>Food name: {{food.name}}</p>
-<p>Food description: {{food.description}}</p>
-<p>Food cost: {{food.price}}</p>
-<p>Food img: {{food.img}}</p>
+<p>Food description: {{foodDetails.food.description}}</p>
+<p>Food cost: {{foodDetails.food.price}}</p>
+<p>Food img: {{foodDetails.food.img}}</p>

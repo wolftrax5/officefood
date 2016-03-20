@@ -21,18 +21,25 @@ if (Meteor.isClient) {
                 template: '<shooping-cart><shopping-cart/>'
             })
             .state('subscribe', {
-                url: 'subscribe',
+                url: '/subscribe',
                 template: '<subscribe></subscribe>'
+            })
+            .state('today_food', {
+                url: '/today_food',
+                template: '<today_menu></today_menu>'
             });
-        $urlRouterProvider.otherwise("/menu");
+        $urlRouterProvider.otherwise("/home");
     });
-
     angular.module('officefood').directive('home', function() {
         return {
             restrict: 'E',
             templateUrl: 'template/home.html',
             controllerAs: 'home',
-            controller: function($scope, $reactive) {
+            controller: function($scope, $reactive, $rootScope) {
+                if (typeof $rootScope.shoppingCart == 'undefined') {
+                    $rootScope.shoppingCart = {};;
+                }
+                $reactive(this).attach($scope);
                 // TODO /home
             }
         };
@@ -43,20 +50,26 @@ if (Meteor.isClient) {
             restrict: 'E',
             templateUrl: 'template/menu.html',
             controllerAs: 'menuList',
-            controller: function ($scope, $reactive) {
+            controller: function ($scope, $reactive, $rootScope) {
+                if (typeof $rootScope.shoppingCart == 'undefined') {
+                    $rootScope.shoppingCart = {};
+                }
                 $reactive(this).attach($scope);
+
                 this.newFood = {};
                 this.helpers({
                     foods: function () {
                         return Foods.find({});
                     }
                 });
-                this.addFood = function () {
-                    Foods.insert(this.newFood);
-                    this.newFood = {};
-                };
-                this.removeFood = function (food) {
-                    Foods.remove({_id: food._id});
+                this.addToCart = function(food) {
+                    if (typeof $rootScope.shoppingCart[food.name] == 'undefined') {
+                        console.log("new food");
+                        $rootScope.shoppingCart[food.name] = 1
+                    } else {
+                        console.log("++ food");
+                        $rootScope.shoppingCart[food.name] += 1
+                    }
                 };
             }
         }
@@ -65,9 +78,25 @@ if (Meteor.isClient) {
         return {
             restrict: 'E',
             templateUrl: 'template/cart.html',
-            controllerAs: 'shoopingCart',
-            controller: function($scope, $reactive) {
-                // TODO /shopping-cart
+            controllerAs: 'cart',
+            controller: function($scope, $reactive, $rootScope) {
+                if (typeof $rootScope.shoppingCart == 'undefined') {
+                    $rootScope.shoppingCart = {};
+                }
+                $reactive(this).attach($scope);
+                console.log($rootScope.shoppingCart);
+                this.helpers({
+                    foods: function() {
+                        var food_array = [];
+                        for (var key in $rootScope.shoppingCart) {
+                            var food = Foods.findOne({name : key});
+                            food.quantity = $rootScope.shoppingCart[key];
+                            food.total = food.quantity * food.price;
+                            food_array.push(food);
+                        }
+                        return food_array;
+                    }
+                });
             }
         };
     });
@@ -77,7 +106,11 @@ if (Meteor.isClient) {
             restrict: 'E',
             templateUrl: 'template/subscribe.html',
             controllerAs: 'subscribe',
-            controller: function($scope, $reactive) {
+            controller: function($scope, $reactive, $rootScope) {
+                if (typeof $rootScope.shoppingCart == 'undefined') {
+                    $rootScope.shoppingCart = {};
+                }
+                $reactive(this).attach($scope);
                 // TODO /subscribe
             }
         };
@@ -88,9 +121,12 @@ if (Meteor.isClient) {
             restrict: 'E',
             templateUrl: 'template/food.html',
             controllerAs: 'foodDetails',
-            controller: function ($scope, $stateParams, $reactive) {
+            controller: function ($scope, $stateParams, $reactive, $rootScope) {
+                if (typeof $rootScope.shoppingCart == 'undefined') {
+                    $rootScope.shoppingCart = {};
+                }
                 $reactive(this).attach($scope);
-                this.food = Foods.findOne({_id: $stateParams.foodId});
+                $scope.food = Foods.findOne({_id: $stateParams.foodId});
                 //this.helpers({
                 //    food: function () {
                 //        return Foods.findOne({_id: $stateParams.foodId});

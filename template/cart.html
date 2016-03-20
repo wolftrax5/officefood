@@ -1,0 +1,76 @@
+<div class="row">
+    <div class="col-sm-offset-1 col-sm-10">
+        <section>
+            <div class="row food-item">
+                <div class="col-sm-12">
+                    <p>Hola, Liz</p>
+                    <p>
+                        Abajo se encuentra el resumen de tu pedido. Te avisaremos al 4491234123, cuando tu envio se
+                        encuentre cerca para que pases a recogerlo.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="row food-item">
+                <div class="col-sm-12">
+                    <span class="glyphicon glyphicon-plus"></span> Editar información
+                </div>
+            </div>
+        </section>
+        <section hidden>
+            <form>
+                <div class="form-group">
+                    <label for="address">Dirección</label>
+                    <input id="address" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="name">Nombre</label>
+                    <input id="name" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Telefono</label >
+                    <input id="phone" type="text" class="form-control">
+                </div>
+            </form>
+        </section>
+        <section>
+            <div class="row food-item" data-ng-repeat="food in cart.foods">
+
+                <div class="col-sm-3">
+                    <img ng-src="{{food.img}}" height="120px">
+                </div>
+                <div class="col-sm-3">
+                    {{food.name}}
+                </div>
+                <div class="col-sm-3">
+                    {{food.quantity}}
+                </div>
+                <div class="col-sm-3">
+                    $ {{food.total}}
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="row food-item">
+                <div class="col-sm-3">
+                    <!--TODO-->
+                    Total
+                </div>
+                <div class="col-sm-offset-6 col-sm-3">
+                    <!--TODO-->
+                    $ 550
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="row food-item">
+                <div class="col-sm-12">
+                    <div class="pull-left">Acepto los terminos y condiciones</div>
+                    <div class="pull-right"><a class="btn-primary btn">Enviar</a></div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+body {
+    background-color: #eeeeee;
+}
+
+.jumbotron-image {
+    display: block;
+    background-image: url("/images/image-background.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 480px;
+}
+
+.jumbotron-image h1,
+.jumbotron-image h2,
+.jumbotron-image h3,
+.jumbotron-image h4,
+.jumbotron-image h5,
+.jumbotron-image h6,
+.jumbotron-image p {
+    text-align: center;
+    margin: auto;
+}
+
+.jumbotron-image .btn {
+    display: block;
+    margin: auto;
+    width: 80%;
+}
+
+.navbar {
+    margin: 0;
+}
+
+.food-name {
+    margin: 10px;
+    text-align: center;
+}
+
+.food-info {
+    margin: 10px;
+}
+
+.food-description {
+    height: 70px;
+}
+
+.food-item {
+    background-color: #fff;
+    color: #888;
+    margin: 10px auto;
+}
+
+.profile-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+section {
+    margin: 10px;
+    padding: 10px;
+    background-color: white;
+}

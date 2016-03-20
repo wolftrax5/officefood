@@ -1,9 +1,27 @@
 <ul>
-    <li ui-sref="food({foodId: food._id})" ng-repeat="food in menuList.foods">
-        <p>Food _id: {{food._id}}</p>
-        <p>Food name: {{food.name}}</p>
-        <p>Food description: {{food.description}}</p>
-        <p>Food cost: {{food.price}}</p>
-        <p>Food image_url: {{food.img}}</p>
-    </li>
+    <div class="col-sm-4" ng-repeat="food in menuList.foods">
+        <div class="food-item">
+            <img ui-sref="food({foodId: food._id})" width="100%" height="66%" ng-src="{{food.img}}" class="food-image">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="food-name">
+                        <h4>{{food.name}}</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="food-info">
+                        <div class="pull-left">
+                            $ {{food.price}}
+                        </div>
+                        <div class="pull-right">
+                            <span ng-click="menuList.addToCart(food)" class="btn btn-primary">Añadir</span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </ul>
