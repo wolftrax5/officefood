@@ -1,0 +1,9 @@
+<ul>
+    <li ui-sref="food({foodId: food._id})" ng-repeat="food in menuList.foods">
+        <p>Food _id: {{food._id}}</p>
+        <p>Food name: {{food.name}}</p>
+        <p>Food description: {{food.description}}</p>
+        <p>Food cost: {{food.price}}</p>
+        <p>Food image_url: {{food.img}}</p>
+    </li>
+</ul>
