@@ -27,6 +27,10 @@ if (Meteor.isClient) {
             .state('today_food', {
                 url: '/today_food',
                 template: '<today_menu></today_menu>'
+            })
+            .state('subscribePlan', {
+                url: '/plan',
+                template: '<plan></plan>'
             });
         $urlRouterProvider.otherwise("/home");
     });
@@ -106,6 +110,21 @@ if (Meteor.isClient) {
             restrict: 'E',
             templateUrl: 'template/subscribe.html',
             controllerAs: 'subscribe',
+            controller: function($scope, $reactive, $rootScope) {
+                if (typeof $rootScope.shoppingCart == 'undefined') {
+                    $rootScope.shoppingCart = {};
+                }
+                $reactive(this).attach($scope);
+                // TODO /subscribe
+            }
+        };
+    });
+
+    angular.module('officefood').directive('plan', function() {
+        return {
+            restrict: 'E',
+            templateUrl: 'template/plan.html',
+            controllerAs: 'plan',
             controller: function($scope, $reactive, $rootScope) {
                 if (typeof $rootScope.shoppingCart == 'undefined') {
                     $rootScope.shoppingCart = {};
