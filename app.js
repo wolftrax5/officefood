@@ -25,11 +25,27 @@ if (Meteor.isClient) {
                 template: '<subscribe></subscribe>'
             })
             .state('today_food', {
-                url: '/today_food',
-                template: '<today_menu></today_menu>'
+                url: '/today',
+                template: '<today-food></today-food>'
             });
         $urlRouterProvider.otherwise("/home");
     });
+    angular.module('officefood').directive('todayFood', function()
+    {
+        return {
+            restrict: 'E',
+            templateUrl: 'template/today.html',
+            controllerAs: 'todayFood',
+            controller: function($scope, $reactive, $rootScope) {
+                if (typeof $rootScope.shoppingCart == 'undefined') {
+                    $rootScope.shoppingCart = {};;
+                }
+                $reactive(this).attach($scope);
+                // TODO /today
+            }
+        }
+    }
+    );
     angular.module('officefood').directive('home', function() {
         return {
             restrict: 'E',
