@@ -10,14 +10,14 @@ if (Meteor.isServer) {
             },
             {
                 'name': "Puerco con esparragos",
-                'description': "Puerco asado acompañado con ",
+                'description': "Puerco asado acompañado con esparragos",
                 'img': "https://d3hvwccx09j84u.cloudfront.net/680,480/image/56cbd976f8b25eef1f8b4569.jpg?t=20160320103554",
                 'price': 60,
                 'tags': ['dairy-free', 'meal']
             },
             {
                 'name': "Pizza de vegetales",
-                'description': "Disfruta de esta deliciza pizza, con tomates, mozzarella, aragula, nueces y aceite balsamico",
+                'description': "Disfruta de esta pizza, con tomates, mozzarella, aragula, nueces y aceite balsamico",
                 'img': "https://d3hvwccx09j84u.cloudfront.net/680,480/image/56cbd98af8b25e65208b4567.jpg?t=20160320114609",
                 'price': 40,
                 'tags': ['dairy-free', 'breakfast']
@@ -39,9 +39,9 @@ if (Meteor.isServer) {
             {
                 'name': "Calabazas gratinadas",
                 'description': "Calabazas asadas y gratinadas, acampañadas con multiples vegetales variados",
-                'img': "https://d3hvwccx09j84u.cloudfront.net/680,480/image/56cbd929fd2cb94c7f8b4567.jpg?t=20160320074609",
+                'img': "https://d3hvwccx09j84u.cloudfront.net/680,480/image/56ccae804dab71fd678b4567.jpg?t=20160316074453",
                 'price': 40,
-                'tags': ['dairy-free', 'breakfast']
+                'tags': ['dairy-free', 'meal']
             },
             {
                 'name': "Hamburguesa",
