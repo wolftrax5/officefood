@@ -1,4 +1,13 @@
 Foods = new Mongo.Collection("foods");
+var globalinit = function(obj, scope, reactive, root) {
+    if (typeof root.shoppingCart == 'undefined') {
+        root.shoppingCart = {};
+        root.DicLength = function(dic) {
+            return Object.keys(dic).length
+        };
+    }
+    reactive(obj).attach(scope);
+};
 if (Meteor.isClient) {
     angular.module('officefood', ['angular-meteor', 'ui.router']);
     angular.module('officefood').config(function ($urlRouterProvider, $stateProvider, $locationProvider) {
@@ -38,10 +47,17 @@ if (Meteor.isClient) {
             controllerAs: 'todayFood',
             controller: function($scope, $reactive, $rootScope) {
                 if (typeof $rootScope.shoppingCart == 'undefined') {
-                    $rootScope.shoppingCart = {};;
+                    $rootScope.shoppingCart = {};
+                    $rootScope.DicLength = function(dic) {
+                        Object.keys(dic).length
+                    };
                 }
                 $reactive(this).attach($scope);
-                // TODO /today
+                this.helpers({
+                    foods: function () {
+                        return Foods.find({});
+                    }
+                });
             }
         }
     }
@@ -52,10 +68,14 @@ if (Meteor.isClient) {
             templateUrl: 'template/home.html',
             controllerAs: 'home',
             controller: function($scope, $reactive, $rootScope) {
-                if (typeof $rootScope.shoppingCart == 'undefined') {
-                    $rootScope.shoppingCart = {};;
-                }
-                $reactive(this).attach($scope);
+                globalinit(this, $scope, $reactive, $rootScope);
+                //if (typeof $rootScope.shoppingCart == 'undefined') {
+                //    $rootScope.shoppingCart = {};
+                //    $rootScope.DicLength = function(dic) {
+                //        Object.keys(dic).length
+                //    };
+                //}
+                //$reactive(this).attach($scope);
                 // TODO /home
             }
         };
@@ -67,12 +87,7 @@ if (Meteor.isClient) {
             templateUrl: 'template/menu.html',
             controllerAs: 'menuList',
             controller: function ($scope, $reactive, $rootScope) {
-                if (typeof $rootScope.shoppingCart == 'undefined') {
-                    $rootScope.shoppingCart = {};
-                }
-                $reactive(this).attach($scope);
-
-                this.newFood = {};
+                globalinit(this, $scope, $reactive, $rootScope);
                 this.helpers({
                     foods: function () {
                         return Foods.find({});
@@ -96,11 +111,7 @@ if (Meteor.isClient) {
             templateUrl: 'template/cart.html',
             controllerAs: 'cart',
             controller: function($scope, $reactive, $rootScope) {
-                if (typeof $rootScope.shoppingCart == 'undefined') {
-                    $rootScope.shoppingCart = {};
-                }
-                $reactive(this).attach($scope);
-                console.log($rootScope.shoppingCart);
+                globalinit(this, $scope, $reactive, $rootScope);
                 this.helpers({
                     foods: function() {
                         var food_array = [];
@@ -123,10 +134,7 @@ if (Meteor.isClient) {
             templateUrl: 'template/subscribe.html',
             controllerAs: 'subscribe',
             controller: function($scope, $reactive, $rootScope) {
-                if (typeof $rootScope.shoppingCart == 'undefined') {
-                    $rootScope.shoppingCart = {};
-                }
-                $reactive(this).attach($scope);
+                globalinit(this, $scope, $reactive, $rootScope);
                 // TODO /subscribe
             }
         };
@@ -138,10 +146,7 @@ if (Meteor.isClient) {
             templateUrl: 'template/food.html',
             controllerAs: 'foodDetails',
             controller: function ($scope, $stateParams, $reactive, $rootScope) {
-                if (typeof $rootScope.shoppingCart == 'undefined') {
-                    $rootScope.shoppingCart = {};
-                }
-                $reactive(this).attach($scope);
+                globalinit(this, $scope, $reactive, $rootScope);
                 $scope.food = Foods.findOne({_id: $stateParams.foodId});
                 //this.helpers({
                 //    food: function () {
