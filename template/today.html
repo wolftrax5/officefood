@@ -10,7 +10,7 @@
                 <h4>Desayuno</h4>
             </div>
             <div class="row food-item">
-                <div class="col-sm-4 food-item" ng-repeat="food in todayFood.foods"
+                <div class="col-sm-4" ng-repeat="food in todayFood.foods"
                      ng-if="food.tags.indexOf('breakfast') >= 0">
                     <img ui-sref="food({foodId: food._id})" width="100%" height="66%" ng-src="{{food.img}}"
                          class="food-image">
@@ -36,14 +36,14 @@
                 <h4>Comida</h4>
             </div>
             <div class="row food-item">
-                <div class="col-sm-4 food-item" ng-repeat="food in todayFood.foods"
+                <div class="col-sm-4" ng-repeat="food in todayFood.foods"
                      ng-if="food.tags.indexOf('meal') >= 0">
                     <img ui-sref="food({foodId: food._id})" width="100%" height="66%" ng-src="{{food.img}}"
                          class="food-image">
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="food-name">
-                                <h4><input type="radio" name="meal" ng-value="food.name"> {{food.name}}</h4>
+                                <h4><input type="radio" name="breakfast" ng-value="food.name"> {{food.name}}</h4>
                             </div>
                         </div>
                     </div>

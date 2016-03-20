@@ -77,6 +77,9 @@ body {
     right: 0;
 }
 
+.package-name {
+    height: 50px;
+}
 section {
     margin: 10px;
     padding: 10px;
