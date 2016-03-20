@@ -1,4 +1,11 @@
-<body ng-app="officefood">
-	<div ng-include src="'template/main.html'">
+<head>
+    <base href="/">
+</head>
+<body>
+    <div ng-app="officefood" ng-strict-di="">
+        <h1>
+            <a href="/menu">Home</a>
+        </h1>
+        <div ui-view=""></div>
     </div>
 </body>
