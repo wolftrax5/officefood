@@ -10,7 +10,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li ui-sref="subscribe"><a href="#">Suscribete</a></li>
-                <li ui-sref="shoppingcart"><a href="#">Carrito<span ng-if="Object.keys(shoppingCart).length>0"> ({{Object.keys(shoppingCart).length}})</span></a></li>
+                <li ui-sref="shoppingcart"><a href="#">Pedido<span ng-if="CartSize(shoppingCart)>0"> ({{CartSize(shoppingCart)}})</span></a></li>
                 <li ui-sref="menu"><a href="#">Menu</a></li>
                 <li ui-sref="profile"><img class="profile-image" src="/images/profile.png"></li>
             </ul>

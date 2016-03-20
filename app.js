@@ -1,9 +1,13 @@
 Foods = new Mongo.Collection("foods");
-var globalinit = function(obj, scope, reactive, root) {
+var globalinit = function (obj, scope, reactive, root) {
     if (typeof root.shoppingCart == 'undefined') {
         root.shoppingCart = {};
-        root.DicLength = function(dic) {
-            return Object.keys(dic).length
+        root.CartSize = function (dic) {
+            var cnt = 0;
+            for (var key in dic) {
+                cnt += dic[key];
+            }
+            return cnt;
         };
     }
     reactive(obj).attach(scope);
@@ -15,7 +19,7 @@ if (Meteor.isClient) {
         $stateProvider
             .state('home', {
                 url: '/home',
-                template: '<home></home>'
+                template: '<home></home><subscribe></subscribe>'
             })
             .state('menu', {
                 url: '/menu',
@@ -43,35 +47,34 @@ if (Meteor.isClient) {
             });
         $urlRouterProvider.otherwise("/home");
     });
-    angular.module('officefood').directive('todayFood', function()
-    {
-        return {
-            restrict: 'E',
-            templateUrl: 'template/today.html',
-            controllerAs: 'todayFood',
-            controller: function($scope, $reactive, $rootScope) {
-                if (typeof $rootScope.shoppingCart == 'undefined') {
-                    $rootScope.shoppingCart = {};
-                    $rootScope.DicLength = function(dic) {
-                        Object.keys(dic).length
-                    };
-                }
-                $reactive(this).attach($scope);
-                this.helpers({
-                    foods: function () {
-                        return Foods.find({});
+    angular.module('officefood').directive('todayFood', function () {
+            return {
+                restrict: 'E',
+                templateUrl: 'template/today.html',
+                controllerAs: 'todayFood',
+                controller: function ($scope, $reactive, $rootScope) {
+                    if (typeof $rootScope.shoppingCart == 'undefined') {
+                        $rootScope.shoppingCart = {};
+                        $rootScope.DicLength = function (dic) {
+                            Object.keys(dic).length
+                        };
                     }
-                });
+                    $reactive(this).attach($scope);
+                    this.helpers({
+                        foods: function () {
+                            return Foods.find({});
+                        }
+                    });
+                }
             }
         }
-    }
     );
-    angular.module('officefood').directive('home', function() {
+    angular.module('officefood').directive('home', function () {
         return {
             restrict: 'E',
             templateUrl: 'template/home.html',
             controllerAs: 'home',
-            controller: function($scope, $reactive, $rootScope) {
+            controller: function ($scope, $reactive, $rootScope) {
                 globalinit(this, $scope, $reactive, $rootScope);
                 //if (typeof $rootScope.shoppingCart == 'undefined') {
                 //    $rootScope.shoppingCart = {};
@@ -97,7 +100,7 @@ if (Meteor.isClient) {
                         return Foods.find({});
                     }
                 });
-                this.addToCart = function(food) {
+                this.addToCart = function (food) {
                     if (typeof $rootScope.shoppingCart[food.name] == 'undefined') {
                         console.log("new food");
                         $rootScope.shoppingCart[food.name] = 1
@@ -109,18 +112,18 @@ if (Meteor.isClient) {
             }
         }
     });
-    angular.module('officefood').directive('shoppingCart', function() {
+    angular.module('officefood').directive('shoppingCart', function () {
         return {
             restrict: 'E',
             templateUrl: 'template/cart.html',
             controllerAs: 'cart',
-            controller: function($scope, $reactive, $rootScope) {
+            controller: function ($scope, $reactive, $rootScope) {
                 globalinit(this, $scope, $reactive, $rootScope);
                 this.helpers({
-                    foods: function() {
+                    foods: function () {
                         var food_array = [];
                         for (var key in $rootScope.shoppingCart) {
-                            var food = Foods.findOne({name : key});
+                            var food = Foods.findOne({name: key});
                             food.quantity = $rootScope.shoppingCart[key];
                             food.total = food.quantity * food.price;
                             food_array.push(food);
@@ -132,24 +135,24 @@ if (Meteor.isClient) {
         };
     });
 
-    angular.module('officefood').directive('subscribe', function() {
+    angular.module('officefood').directive('subscribe', function () {
         return {
             restrict: 'E',
             templateUrl: 'template/subscribe.html',
             controllerAs: 'subscribe',
-            controller: function($scope, $reactive, $rootScope) {
+            controller: function ($scope, $reactive, $rootScope) {
                 globalinit(this, $scope, $reactive, $rootScope);
                 // TODO /subscribe
             }
         };
     });
 
-    angular.module('officefood').directive('plan', function() {
+    angular.module('officefood').directive('plan', function () {
         return {
             restrict: 'E',
             templateUrl: 'template/plan.html',
             controllerAs: 'plan',
-            controller: function($scope, $reactive, $rootScope) {
+            controller: function ($scope, $reactive, $rootScope) {
                 if (typeof $rootScope.shoppingCart == 'undefined') {
                     $rootScope.shoppingCart = {};
                 }

@@ -1,19 +1,20 @@
-<div class="left">
-    <img ng-src="food.img"/>
-    <h2>{{foodDetails.food.name}}</h2>
-    <p>
-        {{foodDetails.food.description}}
-    </p>
-    <div>
-        ${{foodDetails.food.price}}
-        <input ng-model="foodDetails.quantity" value="1">
-        <button ng-click="foodDetails.addToShoppingCart()">Add</button>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="food-item">
+            <img ng-src="{{food.img}}" width="100%"/>
+
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="food-item">
+            <h2>{{food.name}}</h2>
+            <p>
+                {{food.description}}
+            </p>
+            <div>
+                <input ng-model="foodDetails.quantity" value="1">
+                <button ng-click="foodDetails.addToShoppingCart()">Add</button>
+            </div>
+        </div>
     </div>
 </div>
-
-
-<p>Food _id: {{food._id}}</p>
-<p>Food name: {{food.name}}</p>
-<p>Food description: {{foodDetails.food.description}}</p>
-<p>Food cost: {{foodDetails.food.price}}</p>
-<p>Food img: {{foodDetails.food.img}}</p>
